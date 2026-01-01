@@ -53,10 +53,7 @@ function App() {
   const [showPortfolio, setShowPortfolio] = useState(false)
   const currentStage = stages[stageIndex]
   const progress = useMemo(() => (stageIndex + 1) / stages.length, [stageIndex])
-  const devicePixelRatio = useMemo(
-    () => (typeof window !== 'undefined' ? Math.min(window.devicePixelRatio, 1.6) : 1),
-    [],
-  )
+  
   const { active: assetsLoading, progress: loadingProgress } = useProgress()
 
   useEffect(() => {
