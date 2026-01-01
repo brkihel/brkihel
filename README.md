@@ -1,128 +1,73 @@
-<!--
-GitHub Profile README for BRKiHeL
-Copy this into the repo `BRKiHeL/BRKiHeL` as `README.md`.
--->
+# React + TypeScript + Vite
 
-<p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=rect&color=0:0A0F1E,100:14233A&height=80&section=header&text=BRKiHeL&fontColor=E6EDF3&fontSize=42&fontAlignY=55" alt="Banner" />
-</p>
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-<p align="center">
-  <b>Developer • Game Servers • Modding (Valheim, Tibia, Ragnarok) • Infra & DevOps</b><br/>
-  <sub>Building the <i>Genesis</i> ecosystem — mods, servers, panels, and automation.</sub>
-</p>
+Currently, two official plugins are available:
 
-<p align="center">
-  <a href="https://github.com/BRKiHeL?tab=repositories"><img alt="Repos" src="https://img.shields.io/badge/Repos-Explore-1f6feb?style=for-the-badge"/></a>
-  <a href="mailto:diegomacedo04@gmail.com"><img alt="Email" src="https://img.shields.io/badge/Email-Contact-238636?style=for-the-badge"/></a>
-  <a href="https://www.genesisproj.online" target="_blank"><img alt="Website" src="https://img.shields.io/badge/Website-genesisproj.online-8957e5?style=for-the-badge"/></a>
-</p>
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
----
+## React Compiler
 
-## 👋 About me (pt-BR embaixo)
+The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
 
-I'm **Diego (brkihel) Macedo** — a developer focused on **game modding**, **server management**, and **web/back‑end**. I like shipping robust, well‑documented, automated setups — from code to deploy.
+## Expanding the ESLint configuration
 
-* 🔭 Current projects: *GenesisHeim* (Valheim), *Genesis Project Global* (Tibia), *GenesisAthena* (Ragnarok), *GenesisV* (V Rising) and **Azuriom** plugins.
-* 🧭 Featured mod: **NordGuide** (Valheim compass/POIs, BepInEx + Jötunn + HarmonyX).
-* 🧰 Stack: C++/C# (Unity/BepInEx), **LUA**, **PHP** (Laravel/Azuriom), **JavaScript**, Docker, Linux, GitHub Actions, Nginx, Pterodactyl/Reviactyl.
-* 🌍 Languages: pt‑BR (native) and technical English.
+If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
 
-## 🧱 Tech Stack
+```js
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
 
-**Game Modding**
+      // Remove tseslint.configs.recommended and replace with this
+      tseslint.configs.recommendedTypeChecked,
+      // Alternatively, use this for stricter rules
+      tseslint.configs.strictTypeChecked,
+      // Optionally, add this for stylistic rules
+      tseslint.configs.stylisticTypeChecked,
 
-* C#, Unity, BepInEx 5, HarmonyX, Jötunn
-* IL2CPP/Reflection, AssetBundles, UI/IMGUI, Textures/Sprites
+      // Other configs...
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
+```
 
-**Web & Back‑end**
+You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
 
-* PHP 8, Laravel 12, **Azuriom** (plugins & CustomGame)
-* REST APIs, Webhooks, Auth, Mail, Queues
+```js
+// eslint.config.js
+import reactX from 'eslint-plugin-react-x'
+import reactDom from 'eslint-plugin-react-dom'
 
-**Infra & DevOps**
-
-* Linux (Debian/Ubuntu), systemd, cron
-* Docker & Compose, Pterodactyl/Reviactyl Wings
-* Nginx/SSL (Let's Encrypt), Cloudflare
-* Git, GitHub Actions (CI/CD)
-
-**Databases**
-
-* MySQL/MariaDB, SQLite, Redis
-
-> **Preferences:** clean code, clear logs (BepInEx ManualLogSource), versioned configs, documentation, and setup automation scripts.
-
-## 🏗️ Featured Projects
-
-### 🔹 NordGuide — Valheim Compass & POIs
-
-Skyrim‑style compass aligned to the camera, dynamic POIs, smooth edge fade, and scalable icons.
-
-* **Stack:** C#, Unity, BepInEx, HarmonyX, Jötunn
-* **Features:** heading smoothing, dynamic alpha/size, asset loading via reflection to avoid conflicts
-* **Repository:** *[https://github.com/brkihel/NordGuide](https://github.com/brkihel/NordGuide)*
-
-### 🔹 HrafnWork — Professions & Crafting
-
-Professions system (gathering, refining, crafting) with progression and crafting integration.
-
-* **Stack:** C#, BepInEx, HarmonyX, Jötunn
-* **Status:** design & prototype
-
-### 🔹 ValheimServer — Azuriom Plugin
-
-Custom plugin to integrate Valheim servers into **Azuriom** (players, commands, RCON, status, pages).
-
-* **Stack:** PHP 8, Laravel/Azuriom, Docker
-* **Status:** in development
-
-### 🔹 GenesisValhalla — Azuriom Theme
-
-Modern, responsive theme for the Azuriom CMS.
-
-* **Stack:** PHP 8, Laravel/Azuriom
-
-## 📚 Content & Study
-
-I'm documenting training and best practices for **Valheim modding** (BepInEx, HarmonyX, Jötunn), troubleshooting, and CI builds. These guides will be published across the *Genesis* repositories.
-
-## ✉️ Contact
-
-* **Website:** [https://www.genesisproj.online](https://www.genesisproj.online)
-* **Email:** [diegomacedo04@gmail.com](mailto:diegomacedo04@gmail.com)
-* **Discord:** *brkihel*
-* **LinkedIn:** [Diego Macedo](https://www.linkedin.com/in/diegomacedo04/)
-
----
-
-<p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=rect&color=0:0A0F1E,100:14233A&height=40&section=footer" alt="Footer" />
-</p>
-
-
----
-
-<details>
-🇧🇷 Resumo (pt-BR)
-
-👋 Sou Diego (brkihel) Macedo, dev de modding, administração de servidores e web/back‑end.
-
-🧭 Ecossistema Genesis: GenesisHeim (Valheim), Genesis Project Global (Tibia), GenesisAthena (Ragnarok), GenesisV (V Rising) + plugins/temas para Azuriom.
-
-🧰 Stack: C++/C# (Unity/BepInEx), Lua, PHP/Laravel, JavaScript, Docker, Linux, Nginx, Pterodactyl, GitHub Actions.
-
-🔹 Destaque: NordGuide — bússola/POIs estilo Skyrim (heading smoothing, alpha/size dinâmicos, assets via reflection).
-
-🔧 Também construindo: HrafnWork (profissões & crafting), ValheimServer (plugin Azuriom) e GenesisValhalla (tema Azuriom).
-
-✅ Preferências: código limpo, logs claros, configs versionadas e automação de setup.
-
-</details>
-
----
-
-<p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=rect&color=0:0A0F1E,100:14233A&height=40&section=footer" alt="Footer" />
-</p>
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
+      // Enable lint rules for React
+      reactX.configs['recommended-typescript'],
+      // Enable lint rules for React DOM
+      reactDom.configs.recommended,
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
+```
